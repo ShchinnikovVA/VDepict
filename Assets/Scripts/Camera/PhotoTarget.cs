@@ -20,14 +20,14 @@ public class PhotoTarget : MonoBehaviour
     //        var screenPos = CameraManager.CurrentCamera.Camera
     //            .WorldToScreenPoint(_renderer.bounds.center, Camera.MonoOrStereoscopicEye.Mono);
 
-    //        if (screenPos.z < CameraManager.CurrentCamera.Camera.nearClipPlane || 
-    //            screenPos.z > CameraManager.MaxDistToObject) 
+    //        if (screenPos.z < CameraManager.CurrentCamera.Camera.nearClipPlane ||
+    //            screenPos.z > CameraManager.MaxDistToObject)
     //            return;
 
-    //        var screenCenter = new Vector2(tex.width/2, tex.height/2);
+    //        var screenCenter = new Vector2(tex.width / 2, tex.height / 2);
 
     //        var dist = Vector2.Distance(screenCenter, screenPos);
-    //        if (Mathf.Abs(dist) > screenCenter.magnitude/2)
+    //        if (Mathf.Abs(dist) > screenCenter.magnitude / 2)
     //        {
     //            return;
     //        }
