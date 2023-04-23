@@ -13143,6 +13143,7 @@ MonoBehaviour:
   minDistance: 0
   brushPrefab: {fileID: 3594958709847481692, guid: c928ab5c1cc762c43b9bb52081941767,
     type: 3}
+  lookTarget: {fileID: 2110211015}
 --- !u!1 &1879509415
 GameObject:
   m_ObjectHideFlags: 0
@@ -15341,6 +15342,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 821155242321693075, guid: c928ab5c1cc762c43b9bb52081941767,
+        type: 3}
+      propertyPath: m_Sources.Array.data[0].sourceTransform
+      value: 
+      objectReference: {fileID: 2110211018}
+    - target: {fileID: 3594958708785456683, guid: c928ab5c1cc762c43b9bb52081941767,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3594958709847481670, guid: c928ab5c1cc762c43b9bb52081941767,
         type: 3}
       propertyPath: _target
@@ -15369,22 +15380,22 @@ PrefabInstance:
     - target: {fileID: 3594958709847481691, guid: c928ab5c1cc762c43b9bb52081941767,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.23580681
       objectReference: {fileID: 0}
     - target: {fileID: 3594958709847481691, guid: c928ab5c1cc762c43b9bb52081941767,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.0070662675
       objectReference: {fileID: 0}
     - target: {fileID: 3594958709847481691, guid: c928ab5c1cc762c43b9bb52081941767,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.9713383
       objectReference: {fileID: 0}
     - target: {fileID: 3594958709847481691, guid: c928ab5c1cc762c43b9bb52081941767,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.029107457
       objectReference: {fileID: 0}
     - target: {fileID: 3594958709847481691, guid: c928ab5c1cc762c43b9bb52081941767,
         type: 3}
