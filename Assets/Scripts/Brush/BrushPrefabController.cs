@@ -5,24 +5,32 @@ using UnityEngine;
 
 public class BrushPrefabController : MonoBehaviour
 {
+    [HideInInspector]
     public Sprite image;
     public Color color;
-    public float size;
-    public float minDistance;
+    public float size = 1f;
+    [HideInInspector]
+    public float minDistance = 0.1f;
     public GameObject brushPrefab;
     public GameObject lookTarget;
+    private Vector3 lastPosition = new Vector3(0,0,0);
 
 
     private void FixedUpdate()
     {
-        StartCoroutine(DotDistance(minDistance));
+        //StartCoroutine(DotDistance(minDistance));
+        OnClickControllerButton();
     }
-    public void OnClickButton()
+    public void OnClickControllerButton()
     {
-        StartCoroutine(DotDistance(minDistance));
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+            CreateParticleDot(size, brushPrefab, color, image, minDistance);
+        //}
+        //StartCoroutine(DotDistance(minDistance));
     }
 
-    public void CreateParticleDot(float _size, GameObject _brushPrefab, Color _color, Sprite _image)
+    public void CreateParticleDot(float _size, GameObject _brushPrefab, Color _color, Sprite _image, float _minDistance)
     {
         var _scale = new Vector3(_size, _size, _size);
         Vector3 _locate = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
@@ -31,12 +39,17 @@ public class BrushPrefabController : MonoBehaviour
         _brushPrefab.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = _image;
         _brushPrefab.transform.GetChild(0).GetComponent<SpriteRenderer>().color = _color;
         _brushPrefab.transform.localScale = _scale;
-        Instantiate(_brushPrefab, _locate, new Quaternion(0,0,0,0));
+        if (Vector3.Distance(lastPosition, transform.position) > _minDistance)
+        { 
+            Instantiate(_brushPrefab, _locate, new Quaternion(0,0,0,0));
+            lastPosition = transform.position;
+        }
     }
 
-    IEnumerator DotDistance(float _minDistance)
-    {
-        yield return new WaitForSeconds(_minDistance / 100);
-        CreateParticleDot(size, brushPrefab, color, image);
-    }
+    //IEnumerator DotDistance(float _minDistance) //not worced corunine
+    //{
+    //    yield return new WaitForSeconds(_minDistance / 10f);
+    //    CreateParticleDot(size, brushPrefab, color, image);
+    //    StopCoroutine(DotDistance(minDistance));
+    //}
 }
