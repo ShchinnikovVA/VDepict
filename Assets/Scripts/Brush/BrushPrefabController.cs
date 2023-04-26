@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BrushPrefabController : MonoBehaviour
 {
+    #region HiddenProperties
     [HideInInspector]
     public Sprite image;
     [HideInInspector]
@@ -13,22 +14,24 @@ public class BrushPrefabController : MonoBehaviour
     public float size = 1f;
     [HideInInspector]
     public float minDistance = 0.1f;
+    #endregion
+    [Header("Префаб точечной кисти")]
     public GameObject brushPrefab;
+    [Header("Камера игрока")]
     public GameObject lookTarget;
+    [Header("Нажат курок рисования")]
+    public bool isDrawing;
+
     private Vector3 _lastPosition = new Vector3(0,0,0);
     private bool _isLookAtCamera, _isRandom, _isAsBrushRotation;
 
 
-    private void FixedUpdate() // когда будет сделана кнопка на контроллере - убрать
+    private void FixedUpdate() 
     {
-        OnClickControllerButton();
-    }
-    public void OnClickControllerButton()
-    {
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
+        if (isDrawing)
+        {
             CreateParticleDot(size, brushPrefab, color, image, minDistance);
-        //}
+        }
     }
 
     public void CreateParticleDot(float _size, GameObject _brushPrefab, Color _color, Sprite _image, float _minDistance)

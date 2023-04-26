@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DeleteZoneBrush : MonoBehaviour
 {
+    [HideInInspector]
     public float radius = 0.5f;
     void Update()
     {

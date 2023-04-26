@@ -18,6 +18,7 @@ namespace TS.ColorPicker
         [Header("Canvas")]
         public GameObject canvasManager;
 
+
         [Header("References")]
         [SerializeField] private HsbPicker _hsbPicker;
         [SerializeField] private Image _colorResult;
@@ -117,7 +118,8 @@ namespace TS.ColorPicker
             _currentColor = color;
             _colorResult.color = _currentColor;
 
-            canvasManager.GetComponent<BrushCanvasManager>().SetColorValue(color);
+            canvasManager.GetComponent<BrushCanvasManager>().SetColorBrush(color);
+            canvasManager.GetComponent<BrushCanvasManager>().SetLineColor(color);
             OnChanged?.Invoke(color);
         }
         private void SetRgbChannels(Color color)
