@@ -32,15 +32,16 @@ public class BrushCanvasManager : MonoBehaviour
     }
     public void SetBrushImage(GameObject _spriteTemplate) => brushPrefab.GetComponent<BrushPrefabController>().image = _spriteTemplate.GetComponent<Button>().image.sprite;
     public void SetBrushDistance(float _distance) => brushPrefab.GetComponent<BrushPrefabController>().minDistance = _distance;
+    public void SetColorValue(Color _color) => brushPrefab.GetComponent<BrushPrefabController>().color = _color;
     public void SetBrushSize(Slider slider)
     {
         brushPrefab.GetComponent<BrushPrefabController>().size = slider.value;
         brushSizeText.text = slider.value.ToString();
     }
-
     public void SetEraserSize(Slider slider)
     {
         eraserPrefab.GetComponent<DeleteZoneBrush>().radius = slider.value;
         eraserSizeText.text = slider.value.ToString();
     }
+    
 }
