@@ -2906,7 +2906,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1973810449}
   m_Direction: 0
   m_MinValue: 0.1
-  m_MaxValue: 1
+  m_MaxValue: 2
   m_WholeNumbers: 0
   m_Value: 0.1
   m_OnValueChanged:
@@ -7481,8 +7481,6 @@ GameObject:
   m_Component:
   - component: {fileID: 692331674}
   - component: {fileID: 692331675}
-  - component: {fileID: 692331677}
-  - component: {fileID: 692331676}
   m_Layer: 0
   m_Name: Line
   m_TagString: Paint
@@ -7606,35 +7604,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
---- !u!65 &692331676
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692331673}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.1, y: 1.1, z: 0.1}
-  m_Center: {x: 0.5, y: 0.5, z: 0}
---- !u!54 &692331677
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692331673}
-  serializedVersion: 2
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &699897091
 GameObject:
   m_ObjectHideFlags: 0
