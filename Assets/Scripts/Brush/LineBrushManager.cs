@@ -23,39 +23,39 @@ public class LineBrushManager : MonoBehaviour
 
     private void Update()
     {
-        if (isDrawing)
+        if (isDrawing) //если курок нажат
         {
             DrawLine();
         }
         else if (_currentDrawing != null)
         {
-            GenerateMash();
-            _currentDrawing = null;
+            GenerateMash(); // создаём меш для готовой линии
+            _currentDrawing = null; 
         }
     }
 
     public void DrawLine()
     {
-        if (_currentDrawing == null)
+        if (_currentDrawing == null) // если линии нет, создаём новую
         {
             _index = 0;
             _currentDrawing = new GameObject().AddComponent<LineRenderer>();
             _currentDrawing.name = "Line Picture";
             _currentDrawing.tag = "Paint";
             _currentDrawing.gameObject.AddComponent<MeshCollider>();
-            _currentDrawing.gameObject.AddComponent<Rigidbody>();
+            _currentDrawing.gameObject.AddComponent<Rigidbody>(); // физика, чтобы можно было стереть линию
             _currentDrawing.GetComponent<Rigidbody>().mass = 0;
             _currentDrawing.GetComponent<Rigidbody>().useGravity = false;
             _currentDrawing.GetComponent<Rigidbody>().isKinematic = true;
-            _currentDrawing.material = lineMaterial;
+            _currentDrawing.material = lineMaterial; // характеристики рисуемой линии
             _currentDrawing.startColor = _currentDrawing.endColor = lineColor;
             _currentDrawing.startWidth = _currentDrawing.endWidth = lineWidth;
-            _currentDrawing.positionCount = 1;
+            _currentDrawing.positionCount = 1; // первая точка линии
             _currentDrawing.SetPosition(0, lineBrushPrefab.position);
         }
         else
         {
-            var currentPosition = _currentDrawing.GetPosition(_index);
+            var currentPosition = _currentDrawing.GetPosition(_index); // создание новых точек
             if (Vector3.Distance(currentPosition, lineBrushPrefab.position) > distance)
             {
                 _index++;
@@ -65,7 +65,7 @@ public class LineBrushManager : MonoBehaviour
         }
     }
 
-    public void GenerateMash()
+    public void GenerateMash() // создание меша
     {
         MeshCollider collider = new MeshCollider();
         if (collider == null)

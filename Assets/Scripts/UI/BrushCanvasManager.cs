@@ -20,11 +20,12 @@ public class BrushCanvasManager : MonoBehaviour
 
     private void Start()
     { 
+        // отключаем кисти в руке игрока
         brushPrefab.SetActive(false);
         lineBrushPrefab.SetActive(false);
         eraserPrefab.SetActive(false);
     }
-    public void VisibilityGroup(GameObject _group)
+    public void VisibilityGroup(GameObject _group) // функция для активации окон в канвасе игрока
     {
         if (_group.active)
         {
@@ -37,6 +38,7 @@ public class BrushCanvasManager : MonoBehaviour
             mainGroup.SetActive(false);
         }
     }
+    // передача данных в кисти
     #region DotBrush
     public void SetBrushImage(GameObject _spriteTemplate) => brushPrefab.GetComponent<BrushPrefabController>().image = _spriteTemplate.GetComponent<Button>().image.sprite;
     public void SetBrushDistance(float _distance) => brushPrefab.GetComponent<BrushPrefabController>().minDistance = _distance;

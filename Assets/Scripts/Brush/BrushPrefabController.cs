@@ -28,7 +28,7 @@ public class BrushPrefabController : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        if (isDrawing)
+        if (isDrawing) // когда курок нажат
         {
             CreateParticleDot(size, brushPrefab, color, image, minDistance);
         }
@@ -36,25 +36,25 @@ public class BrushPrefabController : MonoBehaviour
 
     public void CreateParticleDot(float _size, GameObject _brushPrefab, Color _color, Sprite _image, float _minDistance)
     {
-        var _scale = new Vector3(_size, _size, _size);
-        Vector3 _locate = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-
-        _brushPrefab.transform.GetComponent<PointLookAtTarget>().target = lookTarget.transform;
-        _brushPrefab.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = _image;
+        var _scale = new Vector3(_size, _size, _size); // размер спрайта
+        Vector3 _locate = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z); // похиция в кисти
+        
+        _brushPrefab.transform.GetComponent<PointLookAtTarget>().target = lookTarget.transform; // цель поворота
+        _brushPrefab.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = _image; // картнка, которую выбрал юзер
         _brushPrefab.transform.GetChild(0).GetComponent<SpriteRenderer>().color = _color;
         _brushPrefab.transform.localScale = _scale;
-        if (Vector3.Distance(_lastPosition, transform.position) > _minDistance)
+        if (Vector3.Distance(_lastPosition, transform.position) > _minDistance) // расстояние между спрайтами
         {
             _brushPrefab.GetComponent<PointLookAtTarget>().isLookAtTarget = _isLookAtCamera;
-            if (_isLookAtCamera)
+            if (_isLookAtCamera) // если выбран поворот к игроку
             {
                 Instantiate(_brushPrefab, _locate, Quaternion.Euler(0, 0, 0));
             }
-            if (_isRandom)
+            if (_isRandom) // случайный поворот спрайта
             {
                 Instantiate(_brushPrefab, _locate, Quaternion.Euler(Random.RandomRange(0, 360), Random.RandomRange(0, 360), Random.RandomRange(0, 360)));
             }
-            if (_isAsBrushRotation)
+            if (_isAsBrushRotation) // поворот спрайта как у кисти
             {
                 Instantiate(_brushPrefab, _locate, Quaternion.Euler(gameObject.transform.rotation.eulerAngles));
             }

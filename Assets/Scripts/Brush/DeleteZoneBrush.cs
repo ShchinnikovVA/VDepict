@@ -6,6 +6,8 @@ public class DeleteZoneBrush : MonoBehaviour
 {
     [HideInInspector]
     public float radius = 0.5f;
+    //[HideInInspector]
+    public bool isDelete;
     void Update()
     {
         if (radius != GetComponent<SphereCollider>().radius)
@@ -17,13 +19,9 @@ public class DeleteZoneBrush : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.name + " удалён");
-        //if (Input.GetKey(KeyCode.E)) //поменять на кнопку контроллера
-        //{
-            //Debug.Log("кнопка Е нажата");
-            if (other.tag == "Paint")
-            {
-                Destroy(other.gameObject);
-            }
-        //}
+        if (other.tag == "Paint" && isDelete) // если в зоне стёрки рисунок и нажат курок
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
