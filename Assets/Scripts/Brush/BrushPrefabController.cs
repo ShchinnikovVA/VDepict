@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BrushPrefabController : MonoBehaviour
 {
+    [Header("Размещение рисунка")]
+    public TimeLineManager frameContainer;
     #region HiddenProperties
     [HideInInspector]
     public Sprite image;
@@ -24,7 +26,7 @@ public class BrushPrefabController : MonoBehaviour
 
     private Vector3 _lastPosition = new Vector3(0,0,0);
     private bool _isLookAtCamera, _isRandom, _isAsBrushRotation;
-
+    private GameObject _dot;
 
     private void FixedUpdate() 
     {
@@ -48,17 +50,19 @@ public class BrushPrefabController : MonoBehaviour
             _brushPrefab.GetComponent<PointLookAtTarget>().isLookAtTarget = _isLookAtCamera;
             if (_isLookAtCamera) // если выбран поворот к игроку
             {
-                Instantiate(_brushPrefab, _locate, Quaternion.Euler(0, 0, 0));
+               _dot = Instantiate(_brushPrefab, _locate, Quaternion.Euler(0, 0, 0));
             }
             if (_isRandom) // случайный поворот спрайта
             {
-                Instantiate(_brushPrefab, _locate, Quaternion.Euler(Random.RandomRange(0, 360), Random.RandomRange(0, 360), Random.RandomRange(0, 360)));
+                _dot = Instantiate(_brushPrefab, _locate, Quaternion.Euler(Random.RandomRange(0, 360), Random.RandomRange(0, 360), Random.RandomRange(0, 360)));
             }
             if (_isAsBrushRotation) // поворот спрайта как у кисти
             {
-                Instantiate(_brushPrefab, _locate, Quaternion.Euler(gameObject.transform.rotation.eulerAngles));
+                _dot = Instantiate(_brushPrefab, _locate, Quaternion.Euler(gameObject.transform.rotation.eulerAngles));
             }
-            
+               
+            frameContainer.SetPaintToFrame(_dot); // отправляем точку в кадр
+            _dot = null;
             _lastPosition = transform.position;
         }
     }

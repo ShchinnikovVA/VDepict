@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LineBrushManager : MonoBehaviour
 {
+    [Header("Размещение рисунка")]
+    public TimeLineManager frameContainer;
     [Header("Линейная кисть")]
     public Transform lineBrushPrefab;
     public Material lineMaterial;
@@ -17,6 +19,7 @@ public class LineBrushManager : MonoBehaviour
     #endregion
     [Header("Нажат курок рисования")]
     public bool isDrawing;
+    
 
     private LineRenderer _currentDrawing;
     private int _index;
@@ -30,6 +33,7 @@ public class LineBrushManager : MonoBehaviour
         else if (_currentDrawing != null)
         {
             GenerateMash(); // создаём меш для готовой линии
+            frameContainer.SetPaintToFrame(_currentDrawing.gameObject);
             _currentDrawing = null; 
         }
     }
