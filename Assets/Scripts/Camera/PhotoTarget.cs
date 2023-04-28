@@ -5,36 +5,36 @@ using UnityEngine;
 public class PhotoTarget : MonoBehaviour
 {
     //[SerializeField] private string AnimalName = "aboba";
-    //private Renderer _renderer;
+    private Renderer _renderer;
 
-    //private void Start()
-    //{
-    //    _renderer = GetComponentInChildren<Renderer>();
-    //}
+    private void Start()
+    {
+        _renderer = GetComponentInChildren<Renderer>();
+    }
 
-    //private void OnRenderObject()
-    //{
-    //    if (CameraManager.IsTakingShot)
-    //    {
-    //        var tex = CameraManager.OutputTexture;
-    //        var screenPos = CameraManager.CurrentCamera.Camera
-    //            .WorldToScreenPoint(_renderer.bounds.center, Camera.MonoOrStereoscopicEye.Mono);
+    private void OnRenderObject()
+    {
+        if (CameraManager.IsTakingShot)
+        {
+            var tex = CameraManager.OutputTexture;
+            var screenPos = CameraManager.CurrentCamera.Camera
+                .WorldToScreenPoint(_renderer.bounds.center, Camera.MonoOrStereoscopicEye.Mono);
 
-    //        if (screenPos.z < CameraManager.CurrentCamera.Camera.nearClipPlane ||
-    //            screenPos.z > CameraManager.MaxDistToObject)
-    //            return;
+            if (screenPos.z < CameraManager.CurrentCamera.Camera.nearClipPlane ||
+                screenPos.z > CameraManager.MaxDistToObject)
+                return;
 
-    //        var screenCenter = new Vector2(tex.width / 2, tex.height / 2);
+            var screenCenter = new Vector2(tex.width / 2, tex.height / 2);
 
-    //        var dist = Vector2.Distance(screenCenter, screenPos);
-    //        if (Mathf.Abs(dist) > screenCenter.magnitude / 2)
-    //        {
-    //            return;
-    //        }
+            var dist = Vector2.Distance(screenCenter, screenPos);
+            if (Mathf.Abs(dist) > screenCenter.magnitude / 2)
+            {
+                return;
+            }
 
-    //        GetPhotographed();
-    //    }
-    //}
+            //GetPhotographed();
+        }
+    }
 
     //public void GetPhotographed()
     //{

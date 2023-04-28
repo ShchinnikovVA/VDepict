@@ -66,6 +66,7 @@ public class BrushPrefabController : MonoBehaviour
             _lastPosition = transform.position;
         }
     }
+    #region Bool Zone
     public void SetBoolCamera()
     {
         _isLookAtCamera = true;
@@ -84,4 +85,5 @@ public class BrushPrefabController : MonoBehaviour
         _isRandom = false;
         _isAsBrushRotation = true;
     }
+    #endregion
 }
