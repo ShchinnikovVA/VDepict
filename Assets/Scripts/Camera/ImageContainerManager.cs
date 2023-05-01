@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ImageContainerManager : MonoBehaviour
 {
     [Header("Коробка с камерой")]
+    public Transform screen;
     public Transform cameraBox;
     #region CamProperties
     [Space]
@@ -30,6 +31,19 @@ public class ImageContainerManager : MonoBehaviour
     void Start()
     {
         imgMassege.SetActive(false);
+    }
+    
+    public void HeightScreen()
+    {
+        screen.localScale = new Vector3(0.24f, 1, 0.32f);
+    }
+    public void WidthScreen()
+    {
+        screen.localScale = new Vector3(0.32f, 1, 0.24f);
+    }
+    public void BoxScreen()
+    {
+        screen.localScale = new Vector3(0.32f, 1, 0.32f);
     }
 
     #region Save Massege
