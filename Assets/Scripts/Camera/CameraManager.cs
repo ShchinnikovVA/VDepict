@@ -10,8 +10,8 @@ public class CameraManager : MonoBehaviour
     public static CameraManager Instance { get; private set; }
     [SerializeField] private CustomRenderTexture outputTex;
     public static CustomRenderTexture OutputTexture => Instance?.outputTex ?? null;
-
-    private CameraController _camera;
+    
+    public CameraController _camera;
 
     [SerializeField] private float _maxDistToObject = 25f;
     public static float MaxDistToObject => Instance._maxDistToObject;
