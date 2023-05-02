@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 94fb73950050c2b4b89077ecc9c9c081, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 9b332481a7b1cf94dbe840fe97bcdf06, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.46941337, g: 0.46941337, b: 0.46941337, a: 1}
+  m_IndirectSpecularColor: {r: 0.041792214, g: 0.041792214, b: 0.04177118, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1824,7 +1824,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -2269,7 +2269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6032,7 +6032,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 678e222ff8ef75e4b801e1b695e95eb5, type: 2}
+  - {fileID: 2100000, guid: 7d03fd0d98b2f1d468b32bd31e505e13, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6232,7 +6232,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 826937048}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1905715138}
+        m_TargetAssemblyTypeName: SceneSettingsGroup, Assembly-CSharp
+        m_MethodName: SetSky
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: 94fb73950050c2b4b89077ecc9c9c081,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &826937048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8327,7 +8340,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f84aa1dd18e54b342a6a2f0b88023221, type: 2}
+  - {fileID: 2100000, guid: c76b38c4592ced548a9f71c6c5625251, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9739,7 +9752,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1507181344}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1905715138}
+        m_TargetAssemblyTypeName: SceneSettingsGroup, Assembly-CSharp
+        m_MethodName: SetSky
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1507181344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12511,9 +12536,6 @@ MonoBehaviour:
   floor: {fileID: 53760046}
   floorMaterial: {fileID: 2100000, guid: a5db052f09a692447baa16642ac3efef, type: 2}
   grid: {fileID: 2800000, guid: 38bf306a80da8c34abb88f6a022e2df9, type: 3}
-  emptySky: {fileID: 0}
-  citySky: {fileID: 0}
-  mountainsSky: {fileID: 0}
 --- !u!1 &1909388317
 GameObject:
   m_ObjectHideFlags: 0
@@ -13230,7 +13252,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 81994e7e8048dbc48bf0c06a3fa7b9d1, type: 2}
+  - {fileID: 2100000, guid: d713593595933c643af7948b4801822e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13342,7 +13364,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1999086726}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1905715138}
+        m_TargetAssemblyTypeName: SceneSettingsGroup, Assembly-CSharp
+        m_MethodName: SetSky
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2100000, guid: 9b332481a7b1cf94dbe840fe97bcdf06,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1999086726
 MonoBehaviour:
   m_ObjectHideFlags: 0

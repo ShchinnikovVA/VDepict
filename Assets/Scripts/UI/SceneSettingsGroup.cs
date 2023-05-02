@@ -9,11 +9,6 @@ public class SceneSettingsGroup : MonoBehaviour
     public GameObject floor;
     public Material floorMaterial;
     public Texture grid;
-    [Header("Небо")]
-    public Skybox emptySky;
-    public Skybox citySky;
-    public Skybox mountainsSky;
-
     public void SetGrid(Toggle toggle)
     {
         if (toggle.isOn)
@@ -25,5 +20,15 @@ public class SceneSettingsGroup : MonoBehaviour
             floorMaterial.mainTexture = null;
         }
     }
-    public void SetFloorColor(Image colorDonor) => floorMaterial.color = colorDonor.color;
+    public void SetFloorColor(Image colorDonor)
+    {
+        RenderSettings.skybox.color = colorDonor.color;
+        floorMaterial.color = colorDonor.color;
+    }
+
+    public void SetSky(Material mat)
+    {
+        mat.color = floorMaterial.color;
+        RenderSettings.skybox = mat;
+    }
 }
