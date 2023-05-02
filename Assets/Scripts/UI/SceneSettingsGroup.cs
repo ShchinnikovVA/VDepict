@@ -22,13 +22,13 @@ public class SceneSettingsGroup : MonoBehaviour
     }
     public void SetFloorColor(Image colorDonor)
     {
-        RenderSettings.skybox.color = colorDonor.color;
+        //RenderSettings.skybox.color = colorDonor.color;
         floorMaterial.color = colorDonor.color;
     }
 
     public void SetSky(Material mat)
     {
-        mat.color = floorMaterial.color;
+        //mat.color = floorMaterial.color;
         RenderSettings.skybox = mat;
     }
 }
