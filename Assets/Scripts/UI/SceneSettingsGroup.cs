@@ -9,6 +9,17 @@ public class SceneSettingsGroup : MonoBehaviour
     public GameObject floor;
     public Material floorMaterial;
     public Texture grid;
+    [Header("Настройки по умолчанию")]
+    [SerializeField]
+    private Material startSky;
+    [SerializeField]
+    private Color startColor = new Color(63, 63, 63);
+
+    private void Start()
+    {
+        SetSky(startSky);
+        floorMaterial.color = startColor;
+    }
     public void SetGrid(Toggle toggle)
     {
         if (toggle.isOn)
@@ -20,7 +31,7 @@ public class SceneSettingsGroup : MonoBehaviour
             floorMaterial.mainTexture = null;
         }
     }
-    public void SetFloorColor(Image colorDonor)
+    public void SetSceneColor(Image colorDonor)
     {
         //RenderSettings.skybox.color = colorDonor.color;
         floorMaterial.color = colorDonor.color;
