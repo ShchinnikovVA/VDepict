@@ -8,7 +8,8 @@ public class SceneSettingsGroup : MonoBehaviour
     [Header("Пол")]
     public GameObject floor;
     public Material floorMaterial;
-    public Texture grid;
+    public Material gridMaterial;
+    //public Texture grid;
     [Header("Стартовые значения")]
     [SerializeField]
     private Material mainSky;
@@ -30,16 +31,19 @@ public class SceneSettingsGroup : MonoBehaviour
     {   
         _step = step;
         floorMaterial.color = startFloorColor;
+        floor.SetActive(true);
         RenderSettings.skybox = mainSky;
         mainSky.SetColor(topName, Color.black);
         mainSky.SetColor(midName, Color.black);
         mainSky.SetColor(botName, Color.black);
+        gridMaterial.color = Color.white;
     }
     public void SetGrid(Toggle toggle) // установка сетки на пол
     {
-        if (toggle.isOn) floorMaterial.mainTexture = grid;
-        else floorMaterial.mainTexture = null;
+        if (!toggle.isOn) gridMaterial.color = new Color(255, 255, 255, 0);
+        else gridMaterial.color = Color.white;
     }
+    public void ShowFloor(Toggle toggle) => floor.SetActive(toggle.isOn);
     public void SetSceneColor(Image colorDonor)
     {
         if (!isSwithedColor) _floorColors = ColorComparison(colorDonor.color, floorMaterial.color); // сохранение нового цвета пола
