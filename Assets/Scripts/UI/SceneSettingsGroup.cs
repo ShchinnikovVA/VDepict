@@ -9,37 +9,107 @@ public class SceneSettingsGroup : MonoBehaviour
     public GameObject floor;
     public Material floorMaterial;
     public Texture grid;
-    [Header("Настройки по умолчанию")]
+    [Header("Стартовые значения")]
     [SerializeField]
-    private Material startSky;
+    private Material mainSky;
     [SerializeField]
-    private Color startColor = new Color(63, 63, 63);
+    private Color startFloorColor = new Color(63, 63, 63);
+    [SerializeField]
+    private float switchTime = 0.01f;
+    #region Privates
+    private string topName = "_TopColor";
+    private string midName = "_MiddleColor";
+    private string botName = "_BottomColor";
+    private int step = 50;
+    private int _step;
+    private float[] _floorColors = {0, 0, 0};
+    private bool isSwithedColor;
+    #endregion
 
-    private void Start()
-    {
-        SetSky(startSky);
-        floorMaterial.color = startColor;
+    private void Start() // стартовые настройки сцены
+    {   
+        _step = step;
+        floorMaterial.color = startFloorColor;
+        RenderSettings.skybox = mainSky;
+        mainSky.SetColor(topName, Color.black);
+        mainSky.SetColor(midName, Color.black);
+        mainSky.SetColor(botName, Color.black);
     }
-    public void SetGrid(Toggle toggle)
+    public void SetGrid(Toggle toggle) // установка сетки на пол
     {
-        if (toggle.isOn)
-        {
-            floorMaterial.mainTexture = grid;
-        }
-        else
-        {
-            floorMaterial.mainTexture = null;
-        }
+        if (toggle.isOn) floorMaterial.mainTexture = grid;
+        else floorMaterial.mainTexture = null;
     }
     public void SetSceneColor(Image colorDonor)
     {
-        //RenderSettings.skybox.color = colorDonor.color;
-        floorMaterial.color = colorDonor.color;
+        if (!isSwithedColor) _floorColors = ColorComparison(colorDonor.color, floorMaterial.color); // сохранение нового цвета пола
     }
-
-    public void SetSky(Material mat)
+    public void WaveSkyColor(Material newSky) // плавная смена неба
     {
-        //mat.color = floorMaterial.color;
-        RenderSettings.skybox = mat;
+        if (!isSwithedColor)
+        {
+            var top = newSky.GetColor(topName); // получение значений цветов старого и нового небес
+            var mid = newSky.GetColor(midName);
+            var bot = newSky.GetColor(botName);
+            var _top = mainSky.GetColor(topName);
+            var _mid = mainSky.GetColor(midName);
+            var _bot = mainSky.GetColor(botName);
+            float[] countTop = ColorComparison(top, _top); // получение разницы между цветами
+            float[] countMid = ColorComparison(mid, _mid);
+            float[] countBot = ColorComparison(bot, _bot);
+
+            if (top.r < _top.r) StartCoroutine(SwitchColor(countTop, countMid, countBot, false)); // начало смены цветов
+            else if (top.r > _top.r) StartCoroutine(SwitchColor(countTop, countMid, countBot, true)); // в зависимости от цвета небо либо темнеет, либо светлеет
+        }
+    }
+    private float[] ColorComparison(Color newColor, Color oldColor) // запись цветов небес
+    {
+        float[] count = {0, 0, 0};
+        if (newColor.r < oldColor.r)
+        {
+            count[0] = (oldColor.r - newColor.r) / step;
+            count[1] = (oldColor.g - newColor.g) / step;
+            count[2] = (oldColor.b - newColor.b) / step;
+        }
+        else if (newColor.r > oldColor.r)
+        {
+            count[0] = (newColor.r - oldColor.r) / step;
+            count[1] = (newColor.g - oldColor.g) / step;
+            count[2] = (newColor.b - oldColor.b) / step;
+        }
+        return count;
+    }
+    IEnumerator SwitchColor(float[] countTop, float[] countMid, float[] countBot, bool isUpColor)
+    {
+        isSwithedColor = true;
+        var _top = mainSky.GetColor(topName); // локальная запись значений цветов текущего неба
+        var _mid = mainSky.GetColor(midName);
+        var _bot = mainSky.GetColor(botName);
+        if (isUpColor) // изменение неба и пола на полученное значение
+        {
+            mainSky.SetColor(topName, new Color(_top.r + countTop[0], _top.g + countTop[1], _top.b + countTop[2]));
+            mainSky.SetColor(midName, new Color(_mid.r + countMid[0], _mid.g + countMid[1], _mid.b + countMid[2]));
+            mainSky.SetColor(botName, new Color(_bot.r + countBot[0], _bot.g + countBot[1], _bot.b + countBot[2]));
+            floorMaterial.color = new Color(floorMaterial.color.r + _floorColors[0], floorMaterial.color.g + _floorColors[1], floorMaterial.color.b + _floorColors[2]);
+        }
+        else
+        {
+            mainSky.SetColor(topName, new Color(_top.r - countTop[0], _top.g - countTop[1], _top.b - countTop[2]));
+            mainSky.SetColor(midName, new Color(_mid.r - countMid[0], _mid.g - countMid[1], _mid.b - countMid[2]));
+            mainSky.SetColor(botName, new Color(_bot.r - countBot[0], _bot.g - countBot[1], _bot.b - countBot[2]));
+            floorMaterial.color = new Color(floorMaterial.color.r - _floorColors[0], floorMaterial.color.g - _floorColors[1], floorMaterial.color.b - _floorColors[2]);
+        }
+        yield return new WaitForSeconds(switchTime);
+        if (step > 0) // делаем это определённое количество раз, чтобы переход был более плавный
+        {
+            step--;
+            StartCoroutine(SwitchColor(countTop, countMid, countBot, isUpColor));
+        }
+        else if (step == 0)
+        {
+            step = _step;
+            isSwithedColor = false;
+            StopCoroutine("SwitchColor");
+        }
     }
 }
