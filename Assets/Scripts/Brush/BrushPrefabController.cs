@@ -28,6 +28,8 @@ public class BrushPrefabController : MonoBehaviour
     private bool _isLookAtCamera, _isRandom, _isAsBrushRotation;
     private GameObject _dot;
 
+    
+
     private void FixedUpdate() 
     {
         if (isDrawing) // когда курок нажат

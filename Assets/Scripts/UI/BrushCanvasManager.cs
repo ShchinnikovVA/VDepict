@@ -21,7 +21,7 @@ public class BrushCanvasManager : MonoBehaviour
     private void Start()
     { 
         // отключаем кисти в руке игрока
-        brushPrefab.SetActive(false);
+        brushPrefab.SetActive(true);
         lineBrushPrefab.SetActive(false);
         eraserPrefab.SetActive(false);
     }
