@@ -20,18 +20,19 @@ public class SkyColorChanger : MonoBehaviour
     public Slider b_slider;
 
     [Range(0, 255)]
-    private float s_R;
+    private int s_R;
     [Range(0, 255)]
-    private float s_G;
+    private int s_G;
     [Range(0, 255)]
-    private float s_B;
-
+    private int s_B;
+    private bool _isSwitched;
     private int _id = 0;
     #endregion
 
     #region Image Chenger
     public void ChangeColor(bool isNext) // ôóíêöèÿ ëèñòàåò ñòğàíèöû
     {
+        _isSwitched = true;
         if (isNext && _id + 1 < 3) _id++;
         else if (!isNext && _id - 1 >= 0) _id--;
         ImageSize(false, topImage);
@@ -57,22 +58,24 @@ public class SkyColorChanger : MonoBehaviour
     }
     public void ImageSize(bool isUp, Image image) // ïîêàçàòü âûáğàííûé öâåò
     {
-        if (isUp)
-        {
-            image.rectTransform.sizeDelta = new Vector2(110, 120);
-            
-        }
+        if (isUp)image.rectTransform.sizeDelta = new Vector2(110, 120);
         else image.rectTransform.sizeDelta = new Vector2(100, 100);
-        // İÒÀ ÏÀĞÀØÀ ÍÅ ÌÎÆÅÒ ÇÀÁĞÀÒÜ ÇÂÅÒÎÂÎÅ ÇÍÀ×ÅÍÈÅ Â ÄÈÀÏÀÇÎÍÅ 0-255 ß ÍÅ ÌÎÃÓ ÓÆÅ ÏÎ×ÅÌÓ ÒÓÒ 0-1 ÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀ
-        //s_R = (byte)image.color.r;
-        //s_G = (byte)image.color.g;
-        //s_B = (byte)image.color.b;
-        //r_slider.value = image.color.r;
-        //g_slider.value = image.color.g;
-        //b_slider.value = image.color.b;
-        Debug.Log("Ñìåíà Íîìåğà: Êğàñíûé (" + image.color.r +"; "+ s_R + ") / Çåë¸íûé (" + image.color.g +"; "+ s_G + ") / Ñèíèé (" + image.color.b +"; "+ s_B + ")");
-}
-
+        Color32 _color = image.color;
+        s_R = _color.r;
+        s_G = _color.g;
+        s_B = _color.b;
+        r_slider.value = _color.r;
+        g_slider.value = _color.g;
+        b_slider.value = _color.b;
+        StartCoroutine(StopColor());
+        
+    }
+    IEnumerator StopColor()
+        {
+            yield return new WaitForSeconds(0.01f);
+            _isSwitched = false;
+            StopCoroutine(StopColor());
+        }
     public void ChangeColorImage() // íàçíà÷èòü íîâûé öâåò
     {
         switch (_id)
@@ -93,18 +96,18 @@ public class SkyColorChanger : MonoBehaviour
     #region Sliders
     public void RedCount(Slider r)
     {
-        s_R = r.value;
-        ChangeColorImage();
+        s_R = (int)r.value;
+        if(!_isSwitched) ChangeColorImage();
     }
     public void GreenCount(Slider g)
     {
-        s_G = g.value;
-        ChangeColorImage();
+        s_G = (int)g.value;
+        if (!_isSwitched) ChangeColorImage();
     }
     public void BlueCount(Slider b)
     {
-        s_B = b.value;
-        ChangeColorImage();
+        s_B = (int)b.value;
+        if (!_isSwitched) ChangeColorImage();
     }
     #endregion
 
@@ -125,13 +128,13 @@ public class SkyColorChanger : MonoBehaviour
     }
     public void UpdatePalette()
     {
-        var count = 255; //èëè 0
-        topImage.color = new Color(count, count, count);
-        midImage.color = new Color(count, count, count);
-        botImage.color = new Color(count, count, count);
-        s_R = r_slider.value = count;
-        s_G = g_slider.value = count;
-        s_B = b_slider.value = count;
+        byte count = 255; //èëè 0
+        topImage.color = new Color32(count, count, count, count);
+        midImage.color = new Color32(count, count, count, count);
+        botImage.color = new Color32(count, count, count, count);
+        r_slider.value = count;
+        g_slider.value = count;
+        b_slider.value = count;
     }
     #endregion
 }
