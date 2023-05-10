@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GroupCreater : MonoBehaviour
 {
+    #region Properties
     [Header("Родитель групп")]
     public Transform groupParent;
     [Header("Текущие группы")]
@@ -18,17 +19,16 @@ public class GroupCreater : MonoBehaviour
     [Header("Стрелки для пролистывания")]
     public GameObject leftArrow;
     public GameObject rightArrow;
-
-    private Button _newItem;
+    [HideInInspector]
+    public GameObject _newItem;
     private int _id = 0;
+    #endregion
 
-    private void Start()
-    {
-        ChangeList(true);
-    }
+    #region Creater
     public void CreateNewItem()
     {
-        
+        _id = groupBox.Count - 1;
+        ChangeList(true);
         if (groupBox[_id].transform.childCount >= groupSize)// иначе создаём новую страницу и повторяем цикл
         {
             if (_id + 1 >= groupBox.Count)
@@ -39,25 +39,35 @@ public class GroupCreater : MonoBehaviour
         }
         if (groupBox[_id].transform.childCount < groupSize) // если детей меньше заданного количества, то добавляем и заканчиваем
         {
-            groupBox[_id].GetComponent<GroupList>().items.Add(Instantiate(buttonSample, groupBox[_id].transform));
-                
+            _newItem = Instantiate(buttonSample, groupBox[_id].transform);
+            //groupBox[_id].GetComponent<GroupList>().items.Add(_newItem); // возможно пригодится
         }
-
     }
-    public void ChangeList(bool isNext)
+    public void ChangeList(bool isNext) // функция листает страницы
     {
         if (isNext && _id + 1 < groupBox.Count) _id++;
         else if (!isNext && _id - 1 >= 0) _id--;
+
         for (int i = 0; i < groupBox.Count; i++)
         {
             groupBox[i].SetActive(false);
         }
         groupBox[_id].SetActive(true);
-        Debug.Log(_id);
 
         if (_id == 0) leftArrow.SetActive(false);
         else leftArrow.SetActive(true);
         if (_id >= groupBox.Count - 1) rightArrow.SetActive(false);
         else rightArrow.SetActive(true);
     }
+    #endregion
+
+    #region Default
+    private void Start() => ChangeList(true);
+    public GameObject GetItem() => _newItem; // возвращает только что созданный итем
+    public void DeleteItem() // удаляет итем, его родитель остаётся
+    {
+        Destroy(_newItem);
+        if (groupBox[_id].transform.childCount <= 1) ChangeList(false);
+    }
+    #endregion
 }

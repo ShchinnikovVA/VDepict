@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SceneSettingsGroup : MonoBehaviour
 {
+    #region Properties
     [Header("Пол")]
     public GameObject floor;
     public Material floorMaterial;
@@ -26,7 +27,9 @@ public class SceneSettingsGroup : MonoBehaviour
     private float[] _floorColors = {0, 0, 0};
     private bool isSwithedColor;
     #endregion
+    #endregion
 
+    #region Default Functionality
     private void Start() // стартовые настройки сцены
     {   
         _step = step;
@@ -44,17 +47,20 @@ public class SceneSettingsGroup : MonoBehaviour
         else gridMaterial.color = Color.white;
     }
     public void ShowFloor(Toggle toggle) => floor.SetActive(toggle.isOn);
+    #endregion
+
+    #region Sky Floor Color Switcher
     public void SetSceneColor(Image colorDonor)
     {
         if (!isSwithedColor) _floorColors = ColorComparison(colorDonor.color, floorMaterial.color); // сохранение нового цвета пола
     }
-    public void WaveSkyColor(Material newSky) // плавная смена неба
+    public void WaveSkyColor(SkySetterButton buttonColors) // плавная смена неба
     {
         if (!isSwithedColor)
         {
-            var top = newSky.GetColor(topName); // получение значений цветов старого и нового небес
-            var mid = newSky.GetColor(midName);
-            var bot = newSky.GetColor(botName);
+            var top = buttonColors.top; // получение значений цветов старого и нового небес
+            var mid = buttonColors.mid;
+            var bot = buttonColors.bot;
             var _top = mainSky.GetColor(topName);
             var _mid = mainSky.GetColor(midName);
             var _bot = mainSky.GetColor(botName);
@@ -99,4 +105,5 @@ public class SceneSettingsGroup : MonoBehaviour
             StopCoroutine("SwitchColor");
         }
     }
+    #endregion
 }

@@ -5,13 +5,38 @@ using UnityEngine.UI;
 
 public class SkySetterButton : MonoBehaviour
 {
-    //ƒействи€ при нажатии
-    public void FloorColor(Image image)
+    #region Properties
+    [Header("÷вет неба")]
+    public Color top;
+    public Color mid;
+    public Color bot;
+    [Header("√лавный скрипт")]
+    public GameObject myManager;
+    private SceneSettingsGroup _sceneSettingsGroup;
+    #endregion
+
+    #region Default
+    private void Start() => SetMyManager(GameObject.Find("Scene Settings")); // ѕ≈–≈ƒ≈Ћј“№, Ё“ќ  ќ—“џЋ№ !!!!!
+    public void SetMyManager(GameObject _manager)
     {
-        // задать кнопке такой же цвет, как и средний цвет нового неба
+        myManager = _manager;
+        _sceneSettingsGroup = myManager.GetComponent<SceneSettingsGroup>();
+        SetListener();
     }
-    public void SkyCreate()
+    public void SetListener()
     {
-        // создать новое небо и сохранить его в ассетах
+        gameObject.GetComponent<Button>().onClick.AddListener(() => _sceneSettingsGroup.SetSceneColor(gameObject.GetComponent<Image>()));
+        gameObject.GetComponent<Button>().onClick.AddListener(() => _sceneSettingsGroup.WaveSkyColor(gameObject.GetComponent<SkySetterButton>()));
     }
+    #endregion
+
+    #region Colors
+    public void TopColor(Color color) => top = color;
+    public void MidColor(Color color)
+    {
+        mid = color;
+        gameObject.GetComponent<Image>().color = color;
+    }
+    public void BotColor(Color color) => bot = color;
+    #endregion
 }
