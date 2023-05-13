@@ -1,0 +1,46 @@
+{
+    "name": "VRControl",
+    "maps": [
+        {
+            "name": "Paint",
+            "id": "81718086-1470-4585-9bdc-8a2bc751873e",
+            "actions": [
+                {
+                    "name": "Painting",
+                    "type": "Button",
+                    "id": "acb3d5cc-74c1-41c7-866e-b6ae4f4414cc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5f143177-b63a-4d38-81cb-fc1c32a7caee",
+                    "path": "<OculusTouchController>/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "VR",
+                    "action": "Painting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "VR",
+            "bindingGroup": "VR",
+            "devices": [
+                {
+                    "devicePath": "<XRController>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
