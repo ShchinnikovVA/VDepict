@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LineBrushManager : MonoBehaviour
 {
@@ -19,13 +20,15 @@ public class LineBrushManager : MonoBehaviour
     #endregion
     [Header("Нажат курок рисования")]
     public bool isDrawing;
-    
 
+    
     private LineRenderer _currentDrawing;
     private int _index;
 
+    
     private void Update()
     {
+
         if (isDrawing) //если курок нажат
         {
             DrawLine();
@@ -36,8 +39,20 @@ public class LineBrushManager : MonoBehaviour
             frameContainer.SetPaintToFrame(_currentDrawing.gameObject);
             _currentDrawing = null; 
         }
+        
     }
 
+    
+    public void SetDrawingTrue()
+    {
+        isDrawing = true;
+        Debug.Log(isDrawing);
+    }
+    public void SetDrawingFalse()
+    {
+        isDrawing = false;
+        Debug.Log(isDrawing);
+    }
     public void DrawLine()
     {
         if (_currentDrawing == null) // если линии нет, создаём новую
@@ -80,4 +95,6 @@ public class LineBrushManager : MonoBehaviour
         _currentDrawing.BakeMesh(mesh, true);
         collider.sharedMesh = mesh;
     }
+
+    
 }
