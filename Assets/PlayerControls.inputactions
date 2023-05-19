@@ -22,15 +22,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "UIConfirm",
-                    "type": "Button",
-                    "id": "24c8f584-9e85-4bff-b665-c35cedafdd57",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -38,7 +29,7 @@
                     "name": "",
                     "id": "47b02a64-6bbe-4029-a622-2a6fcead7a0e",
                     "path": "<XRController>{RightHand}/triggerPressed",
-                    "interactions": "Press(pressPoint=1)",
+                    "interactions": "Press(pressPoint=0.1,behavior=2)",
                     "processors": "",
                     "groups": "",
                     "action": "Painting",
@@ -70,22 +61,11 @@
                 {
                     "name": "",
                     "id": "8753dd13-efb5-4f56-a937-10b28fa273a5",
-                    "path": "<XRController>{RightHand}/triggerPressed",
-                    "interactions": "Press(pressPoint=1.401298E-45,behavior=1)",
+                    "path": "<XRController>{RightHand}/triggerTouched",
+                    "interactions": "Press(pressPoint=0.1,behavior=1)",
                     "processors": "",
                     "groups": "",
                     "action": "DisablePainting",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6bee5e77-d89e-49bc-bac1-d9ce19efbc63",
-                    "path": "<XRController>{RightHand}/primaryButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UIConfirm",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -46,12 +46,12 @@ public class LineBrushManager : MonoBehaviour
     public void SetDrawingTrue()
     {
         isDrawing = true;
-        Debug.Log(isDrawing);
+
     }
     public void SetDrawingFalse()
     {
         isDrawing = false;
-        Debug.Log(isDrawing);
+ 
     }
     public void DrawLine()
     {
