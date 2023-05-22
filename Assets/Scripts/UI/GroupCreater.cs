@@ -43,6 +43,8 @@ public class GroupCreater : MonoBehaviour
             //groupBox[_id].GetComponent<GroupList>().items.Add(_newItem); // возможно пригодится
         }
     }
+
+    
     public void ChangeList(bool isNext) // функция листает страницы
     {
         if (isNext && _id + 1 < groupBox.Count) _id++;

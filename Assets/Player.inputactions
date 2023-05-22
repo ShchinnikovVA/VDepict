@@ -1,0 +1,34 @@
+{
+    "name": "Player",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "493dce70-61b9-4cf8-92ce-6436eb0ef86c",
+            "actions": [
+                {
+                    "name": "DeleteSave",
+                    "type": "Button",
+                    "id": "848b4e88-d3c8-423a-89f6-8ccbe0feae6e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c215e144-82e2-4617-82ba-027281e3f8af",
+                    "path": "<Keyboard>/rightShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DeleteSave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

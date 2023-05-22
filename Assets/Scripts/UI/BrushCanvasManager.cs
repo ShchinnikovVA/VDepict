@@ -22,7 +22,7 @@ public class BrushCanvasManager : MonoBehaviour
     { 
         // отключаем кисти в руке игрока
         brushPrefab.SetActive(false);
-        lineBrushPrefab.SetActive(true);
+        lineBrushPrefab.SetActive(false);
         eraserPrefab.SetActive(false);
     }
     public void VisibilityGroup(GameObject _group) // функция для активации окон в канвасе игрока

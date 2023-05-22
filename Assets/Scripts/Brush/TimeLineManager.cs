@@ -24,6 +24,7 @@ public class TimeLineManager : MonoBehaviour
     private int _fr = 0; //сохранение номера кадра для отображения предыдущего
     [HideInInspector]
     public bool _isAnimate;
+    public Transform FramesFolder;
     #endregion
 
     void Start()
@@ -39,10 +40,11 @@ public class TimeLineManager : MonoBehaviour
     #region Frame Settings
     public void CreateFrame()
     {
+
         //Debug.Log(_index);
         if (_frames[_index] == null)
         {
-            _frames[_index] = Instantiate(frame, transform);
+            _frames[_index] = Instantiate(frame, FramesFolder);
             frameExist.color = Color.green;
             for (int j = 0; j <= frameCount - 1; j++)
             {

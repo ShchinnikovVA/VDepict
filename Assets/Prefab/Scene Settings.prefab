@@ -328,10 +328,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5389288635494694507}
+  m_Children: []
   m_Father: {fileID: 5389288634686411588}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -2966,6 +2965,7 @@ RectTransform:
   - {fileID: 5389288634385811797}
   - {fileID: 5389288634396867327}
   - {fileID: 5389288634734653922}
+  - {fileID: 5389288635494694507}
   - {fileID: 5389288634107895027}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -5278,6 +5278,7 @@ GameObject:
   - component: {fileID: 5389288635449101290}
   - component: {fileID: 5389288635449101291}
   - component: {fileID: 5389288635449101288}
+  - component: {fileID: 2577248403015506494}
   m_Layer: 5
   m_Name: Button (Save Scene)
   m_TagString: Untagged
@@ -5412,6 +5413,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2577248403015506494}
+        m_TargetAssemblyTypeName: SaveLoadManager, Assembly-CSharp
+        m_MethodName: Save
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2577248403015506494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389288635449101294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac98647091aca34bb5f5dba68d378da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5389288635460594303
 GameObject:
   m_ObjectHideFlags: 0
@@ -5568,12 +5593,12 @@ RectTransform:
   - {fileID: 5389288635173288532}
   - {fileID: 5389288634662641487}
   - {fileID: 5389288635347168651}
-  m_Father: {fileID: 5389288634107895027}
-  m_RootOrder: 0
+  m_Father: {fileID: 5389288634686411588}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -485.99976, y: 305.99976}
+  m_AnchoredPosition: {x: -279.99976, y: -0.0002746582}
   m_SizeDelta: {x: 512, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5389288635494694517

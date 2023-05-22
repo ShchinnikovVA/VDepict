@@ -28,7 +28,7 @@ public class BrushPrefabController : MonoBehaviour
     private bool _isLookAtCamera, _isRandom, _isAsBrushRotation;
     private GameObject _dot;
 
-    public void FixedUpdate()
+    private void FixedUpdate() 
     {
         if (isDrawing) // когда курок нажат
         {
@@ -65,19 +65,6 @@ public class BrushPrefabController : MonoBehaviour
             _dot = null;
             _lastPosition = transform.position;
         }
-    }
-
-    public void Painting()
-    {
-        // когда курок нажат
-        
-            CreateParticleDot(size, brushPrefab, color, image, minDistance);
-        
-    }
-
-    public void SetIsDrawingTrue()
-    {
-        isDrawing = true;
     }
     #region Bool Zone
     public void SetBoolCamera()

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class LineBrushManager : MonoBehaviour
 {
@@ -9,6 +8,7 @@ public class LineBrushManager : MonoBehaviour
     public TimeLineManager frameContainer;
     [Header("Линейная кисть")]
     public Transform lineBrushPrefab;
+    public LineRenderer linePrefab;
     public Material lineMaterial;
     #region HiddenProperties
     [HideInInspector]
@@ -20,15 +20,13 @@ public class LineBrushManager : MonoBehaviour
     #endregion
     [Header("Нажат курок рисования")]
     public bool isDrawing;
-
     
+
     private LineRenderer _currentDrawing;
     private int _index;
 
-    
     private void Update()
     {
-
         if (isDrawing) //если курок нажат
         {
             DrawLine();
@@ -39,33 +37,22 @@ public class LineBrushManager : MonoBehaviour
             frameContainer.SetPaintToFrame(_currentDrawing.gameObject);
             _currentDrawing = null; 
         }
-        
     }
 
-    
-    public void SetDrawingTrue()
-    {
-        isDrawing = true;
-
-    }
-    public void SetDrawingFalse()
-    {
-        isDrawing = false;
- 
-    }
     public void DrawLine()
     {
         if (_currentDrawing == null) // если линии нет, создаём новую
         {
             _index = 0;
-            _currentDrawing = new GameObject().AddComponent<LineRenderer>();
-            _currentDrawing.name = "Line Picture";
-            _currentDrawing.tag = "Paint";
-            _currentDrawing.gameObject.AddComponent<MeshCollider>();
-            _currentDrawing.gameObject.AddComponent<Rigidbody>(); // физика, чтобы можно было стереть линию
-            _currentDrawing.GetComponent<Rigidbody>().mass = 0;
-            _currentDrawing.GetComponent<Rigidbody>().useGravity = false;
-            _currentDrawing.GetComponent<Rigidbody>().isKinematic = true;
+            _currentDrawing = Instantiate(linePrefab);
+            //_currentDrawing = new GameObject().AddComponent<LineRenderer>();
+            //_currentDrawing.name = "Line Picture";
+            //_currentDrawing.tag = "Paint";
+            //_currentDrawing.gameObject.AddComponent<MeshCollider>();
+            //_currentDrawing.gameObject.AddComponent<Rigidbody>(); // физика, чтобы можно было стереть линию
+            //_currentDrawing.GetComponent<Rigidbody>().mass = 0;
+            //_currentDrawing.GetComponent<Rigidbody>().useGravity = false;
+            //_currentDrawing.GetComponent<Rigidbody>().isKinematic = true;
             _currentDrawing.material = lineMaterial; // характеристики рисуемой линии
             _currentDrawing.startColor = _currentDrawing.endColor = lineColor;
             _currentDrawing.startWidth = _currentDrawing.endWidth = lineWidth;
@@ -95,6 +82,4 @@ public class LineBrushManager : MonoBehaviour
         _currentDrawing.BakeMesh(mesh, true);
         collider.sharedMesh = mesh;
     }
-
-    
 }
