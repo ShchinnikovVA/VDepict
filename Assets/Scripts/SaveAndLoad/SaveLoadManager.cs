@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,8 +20,8 @@ public class SaveLoadManager : MonoBehaviour
 
     public class FrameDTO
     {
-        public LineRendererData[] LineInFrames { get; set; }
-        public int OrderInFrames { get; set; }
+        public LineRendererData[] FrameLines { get; set; }
+        public int FrameOrderId { get; set; }
 
     }
     public class LineRendererData
@@ -35,10 +36,10 @@ public class SaveLoadManager : MonoBehaviour
         public float Z { get; set; }
     }
 
-
-
-    public string pathToSave = Application.dataPath + "/saves/";
+    private string _pathToSave { get => Path.Combine(Application.dataPath, "saves"); }
     public Transform FramesContainer;
+    public LineRenderer LinePrefab;
+    
     public void Save()
     {
 
@@ -53,8 +54,8 @@ public class SaveLoadManager : MonoBehaviour
 
             FrameDTO frameDTO = new FrameDTO
             {
-                OrderInFrames = counter,
-                LineInFrames = frame.GetComponentsInChildren<LineRenderer>().Select(l =>
+                FrameOrderId = counter,
+                FrameLines = frame.GetComponentsInChildren<LineRenderer>().Select(l =>
                 {
                     var vector = new Vector3[l.positionCount];
                     
@@ -68,8 +69,8 @@ public class SaveLoadManager : MonoBehaviour
         }
         string json = JsonConvert.SerializeObject(sceneDTO);
         string fileName = DateTime.Now.ToString();
-        var path = Path.Combine(Application.dataPath,"/saves/" + fileName + ".json");
-        path = path.Replace("/", "\\");
+        var path = Path.Combine(_pathToSave, fileName + ".json");
+        // path = path.Replace("/", "\\");
         FileInfo file = new FileInfo(path);
         if (!file.Exists)
         {
@@ -82,12 +83,49 @@ public class SaveLoadManager : MonoBehaviour
         Debug.Log(path);
     }
 
-    public void Load(string name)
+    public async Task Load(string name)
     {
-
         //string jsonString = File.ReadAllText(fileName);
         //JsonConvert.DeserializeObject<SceneDTO>();
+        var savesFolder = new DirectoryInfo(_pathToSave);
+        if (savesFolder.Exists)
+        {
+            var file = savesFolder.EnumerateFiles().
+                OrderByDescending(f => f.LastWriteTimeUtc)
+                .FirstOrDefault();
 
+            if (!file.Exists) return;
+            using var fs = file.OpenRead();
+            var bytes = new byte[file.Length];
+            await fs.ReadAsync(bytes, 0, bytes.Length);
+
+            var json = Encoding.UTF8.GetString(bytes);
+
+
+            var scene = JsonConvert.DeserializeObject<SceneDTO>(json);
+
+            foreach (Transform ch in FramesContainer)
+            {
+                Destroy(ch.gameObject);
+            }
+
+            foreach (var fr in scene.FramesData.OrderBy(fr => fr.FrameOrderId))
+            {
+                var gayObj = new GameObject();
+                gayObj.transform.SetParent(FramesContainer, false);
+                gayObj.transform.localPosition = Vector3.zero;
+
+                foreach(var line in fr.FrameLines)
+                {
+                    var points = line.Points
+                        .Select(p => new Vector3(x: p.X, y: p.Y, z: p.Z))
+                        .ToArray();
+                    var lr = Instantiate(LinePrefab, gayObj.transform, false);
+                    lr.transform.localPosition = points.First();
+                    lr.SetPositions(points);
+                }
+            }
+        }
     }
 
     //public void Check()
