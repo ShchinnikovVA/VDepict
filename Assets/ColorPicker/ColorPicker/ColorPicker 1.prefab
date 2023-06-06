@@ -270,9 +270,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d52469098a00d88449e4e257495fdca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasManager: {fileID: 0}
   _hsbPicker: {fileID: 1698597960162957204}
   _colorResult: {fileID: 181038344734301733}
-  _inputHex: {fileID: 0}
+  _colorOld: {fileID: 0}
   OnChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -452,7 +453,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &181038343914807821
 RectTransform:
   m_ObjectHideFlags: 0
@@ -668,7 +669,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &181038344145393883
 RectTransform:
   m_ObjectHideFlags: 0
@@ -900,7 +901,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &181038344200593701
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1575,7 +1576,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &123705467603423786
 RectTransform:
   m_ObjectHideFlags: 0

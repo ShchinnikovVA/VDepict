@@ -69,6 +69,8 @@ public class SaveLoadManager : MonoBehaviour
         }
         string json = JsonConvert.SerializeObject(sceneDTO);
         string fileName = DateTime.Now.ToString();
+        
+        Debug.Log(fileName);
         var path = Path.Combine(_pathToSave, fileName + ".json");
         // path = path.Replace("/", "\\");
         FileInfo file = new FileInfo(path);
@@ -80,7 +82,7 @@ public class SaveLoadManager : MonoBehaviour
         using var fs = file.OpenWrite();
         var byteBuffer = Encoding.UTF8.GetBytes(json);
         fs.Write(byteBuffer, 0, byteBuffer.Length);
-        Debug.Log(path);
+        //Debug.Log(path);
     }
 
     public async Task Load(string name)
@@ -126,6 +128,10 @@ public class SaveLoadManager : MonoBehaviour
                 }
             }
         }
+    }
+    public void Loading()
+    {
+    
     }
 
     //public void Check()
